@@ -26,6 +26,10 @@ export class TodayComponent implements OnInit, OnDestroy {
   isToastOpen = false;
   toastColor: "danger" | "success" | "warning" | undefined = undefined
   clockStatusChangedSubscription?: Subscription;
+  isConfirmAlertOpen: boolean = false;
+  confirmed: boolean = false;
+  confirmMessage: string = '';
+  private confirmHandler: () => void = () => { };
   setToastOpen(isOpen: boolean) {
     this.isToastOpen = isOpen;
   }
@@ -37,6 +41,22 @@ export class TodayComponent implements OnInit, OnDestroy {
     },
   ];
   todayDate: string = ""
+  confirmButtons = [
+    {
+      text: 'Cancel',
+      role: 'cancel',
+      handler: () => {
+
+      },
+    },
+    {
+      text: 'OK',
+      role: 'confirm',
+      handler: () => {
+        this.confirmHandler();
+      },
+    },
+  ];
   constructor(private clockerService: ClockerService) {
 
   }
@@ -48,6 +68,17 @@ export class TodayComponent implements OnInit, OnDestroy {
     this.clockStatusChangedSubscription = this.clockerService.clockStatusChanged$.subscribe(newStatus => {
       this.clockStatus = newStatus;
     })
+  }
+
+  requestClockIn() {
+    this.confirmHandler = this.clockIn;
+    this.confirmMessage = "Clock In?"
+    this.isConfirmAlertOpen = true;
+  }
+  requestClockOut() {
+    this.confirmHandler = this.clockOut;
+    this.confirmMessage = "Clock Out?"
+    this.isConfirmAlertOpen = true;
   }
 
   async clockIn() {
@@ -64,6 +95,9 @@ export class TodayComponent implements OnInit, OnDestroy {
       this.toastColor = "warning";
       this.setToastOpen(true);
     });
+  }
+  setConfirmOpen(open: boolean) {
+    this.isConfirmAlertOpen = open;
   }
 
 

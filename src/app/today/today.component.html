@@ -11,30 +11,27 @@
         <ion-col></ion-col>
       </ion-row>
     </ion-grid>
-
-
-
   </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding">
   <div class="content-container">
     <div class="buttons-row">
-      <ion-button (click)="clockIn()">
+      <ion-button (click)="requestClockIn()">
         <ion-icon slot="start" name="log-in-outline"></ion-icon>
         Clock In
       </ion-button>
       <ion-chip *ngIf="clockStatus"
         [color]="(clockStatus === ClockType.In) ? 'success': 'tertiary'">{{"status:"+clockStatus}}</ion-chip>
-      <ion-button (click)="clockOut()">
+      <ion-button (click)="requestClockOut()">
         <ion-icon slot="end" name="log-out-outline"></ion-icon>
         Clock Out
       </ion-button>
     </div>
     <app-today-clock-list class="clock-list"></app-today-clock-list>
   </div>
-
-
 </ion-content>
-
 <ion-toast [color]="toastColor" [isOpen]="isToastOpen" [message]="toastMessage" [duration]="3000"
   [buttons]="toastButtons" (didDismiss)="setToastOpen(false)"></ion-toast>
+<!--confirmation alert-->
+<ion-alert [isOpen]="isConfirmAlertOpen" header="Confirm" [message]="confirmMessage" [buttons]="confirmButtons"
+  (didDismiss)="setConfirmOpen(false)"></ion-alert>
