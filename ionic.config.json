@@ -1,0 +1,7 @@
+{
+  "name": "simpleClocker",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

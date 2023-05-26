@@ -1,0 +1,24 @@
+.buttons-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px 0;
+    align-items: center;
+
+    ion-button {
+        min-width: 146px;
+    }
+}
+
+
+
+.content-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.clock-list {
+    flex-grow: 1;
+    overflow-y: auto;
+}
