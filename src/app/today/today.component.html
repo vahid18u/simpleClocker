@@ -16,13 +16,13 @@
 <ion-content class="ion-padding">
   <div class="content-container">
     <div class="buttons-row">
-      <ion-button (click)="requestClockIn()">
+      <ion-button [disabled]="clockStatus === ClockType.In" (click)="requestClockIn()">
         <ion-icon slot="start" name="log-in-outline"></ion-icon>
         Clock In
       </ion-button>
       <ion-chip *ngIf="clockStatus"
         [color]="(clockStatus === ClockType.In) ? 'success': 'tertiary'">{{"status:"+clockStatus}}</ion-chip>
-      <ion-button (click)="requestClockOut()">
+      <ion-button [disabled]="clockStatus !== ClockType.In" (click)="requestClockOut()">
         <ion-icon slot="end" name="log-out-outline"></ion-icon>
         Clock Out
       </ion-button>
