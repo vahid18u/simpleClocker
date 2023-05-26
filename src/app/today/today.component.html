@@ -1,21 +1,32 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>
-      Today
-    </ion-title>
+    <ion-grid>
+      <ion-row>
+        <ion-col> <ion-title class="today-title">
+            Today
+          </ion-title></ion-col>
+        <ion-col>
+          <div class="today-date-container">{{todayDate}}</div>
+        </ion-col>
+        <ion-col></ion-col>
+      </ion-row>
+    </ion-grid>
+
+
+
   </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding">
   <div class="content-container">
     <div class="buttons-row">
       <ion-button (click)="clockIn()">
-        <ion-icon slot="start" name="star"></ion-icon>
+        <ion-icon slot="start" name="log-in-outline"></ion-icon>
         Clock In
       </ion-button>
       <ion-chip *ngIf="clockStatus"
         [color]="(clockStatus === ClockType.In) ? 'success': 'tertiary'">{{"status:"+clockStatus}}</ion-chip>
       <ion-button (click)="clockOut()">
-        <ion-icon slot="start" name="star"></ion-icon>
+        <ion-icon slot="end" name="log-out-outline"></ion-icon>
         Clock Out
       </ion-button>
     </div>

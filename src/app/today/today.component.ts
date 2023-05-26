@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ClockType, ClockerService } from '../services/clocker.service';
 import { Subscription } from 'rxjs';
+import * as moment from 'moment-jalaali';
 
 export interface ClocksTodayViewModel {
   items: {
@@ -35,7 +36,7 @@ export class TodayComponent implements OnInit, OnDestroy {
       role: 'cancel',
     },
   ];
-
+  todayDate: string = ""
   constructor(private clockerService: ClockerService) {
 
   }
@@ -43,6 +44,7 @@ export class TodayComponent implements OnInit, OnDestroy {
     this.clockStatusChangedSubscription?.unsubscribe();
   }
   ngOnInit(): void {
+    this.todayDate = moment().format("jD jMMMM jYYYY");
     this.clockStatusChangedSubscription = this.clockerService.clockStatusChanged$.subscribe(newStatus => {
       this.clockStatus = newStatus;
     })
